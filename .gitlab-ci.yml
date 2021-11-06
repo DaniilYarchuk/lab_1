@@ -1,0 +1,16 @@
+ stages:
+   - test
+   - deploy
+ test_job:
+     stage: test
+     tags:
+        - runner1
+     script:
+        - ansible-playbook myplaybook.yaml --check -i hosts
+      
+ deploy_job:
+     stage: deploy
+     tags:
+        - runner1
+     script:
+        - ansible-playbook myplaybook.yaml -i hosts
