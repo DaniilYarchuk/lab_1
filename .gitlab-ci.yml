@@ -1,6 +1,6 @@
  stages:
    - test
-   - deploy
+   - apply
  test_job:
      stage: test
      tags:
@@ -9,7 +9,7 @@
         - ansible-playbook myplaybook.yaml --check -i hosts
       
  deploy_job:
-     stage: deploy
+     stage: apply
      tags:
         - runner1
      script:
