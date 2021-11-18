@@ -1,0 +1,21 @@
+---
+- name: AUTOMATIC SWITCH CONFIG
+  hosts: Switches
+  gather_facts: false
+  connection: local
+
+  tasks:
+          
+          - name: DISPLAYING THE RUNNING CONFIG
+            ios_command:
+                    commands:
+                            - show running-config
+            register: config
+
+          - name: SAVE OUTPUTS
+            copy:
+                    content: "{{ config.stdout[0] }}"
+                    dest: "{{ inventory_hostname }}.txt"
+           
+            
+          
