@@ -1,16 +1,25 @@
+  GNU nano 2.9.3                    .gitlab-ci.yml                              
+
  stages:
-   - test
-   - apply
- test_job:
-     stage: test
-     tags:
-        - runner1
-     script:
-        - ansible-playbook myplaybook.yaml --check -i hosts
-      
- deploy_job:
-     stage: apply
+   - apply_playbook
+   - test1
+
+ apply_job:
+     stage: apply_playbook
      tags:
         - runner1
      script:
         - ansible-playbook myplaybook.yaml -i hosts
+
+ test_job1:
+     stage: test1
+     tags:
+          - runner1
+     script:
+          - ansible-playbook testplaybook.yaml -i hosts
+          - python3 test1.py
+     artifacts:
+          paths:
+              - S*.txt
+
+
