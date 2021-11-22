@@ -1,0 +1,16 @@
+---
+- name: AUTOMATIC SWITCH CONFIG
+  hosts: Swithes
+  connection: local
+  gather_facts: false
+  tasks:  
+          - name: CORRECTNESS TEST 
+            ios_command:
+               commands: "{{ item }}"
+               wait_for:
+                 - result[0] contains "hostname {{inventory_hostname}}"
+                 - result[0] contains "service password-encryption"
+                 - result[0] contains "banner motd ^CAuthorized Access Only!^C"
+            loop:
+                    - show running-config
+                    - show startup-config 
