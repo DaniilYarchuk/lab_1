@@ -1,15 +1,10 @@
-S1 ansible_host=192.168.15.41
-S2 ansible_host=192.168.15.42
-S3 ansible_host=192.168.15.43
+[Swithes]
+S1 ansible_host=192.168.15.41 dev="Chel1"
+S2 ansible_host=192.168.15.42 dev=Chel2
+S3 ansible_host=192.168.15.43 dev=Chel3
 
-[Switches]
-S[1:3]
-
-[Switches:vars]
+[Swithes:vars]
+ansible_network_os="ios"
+ansible_connection="network_cli"
 ansible_user=admin
 ansible_password=cisco
-
-
-
-
-
