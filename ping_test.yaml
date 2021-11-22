@@ -1,0 +1,23 @@
+---
+- name: AUTOMATIC SWITCH CONFIG
+  hosts: Swithes
+  connection: local
+  gather_facts: false
+  vars:
+          Switch1: S1
+          Switch2: S2
+          Switch3: S3
+          Password: cisco
+  tasks:
+
+  - name: PING TO ALL HOSTS
+    ios_command:
+       commands: "ping {{ item }}"
+       wait_for:
+          - result[0] contains 'Success rate is 100 percent'  
+    loop:
+         - 192.168.15.40 
+         - 192.168.15.41
+         - 192.168.15.42
+         - 192.168.15.43
+
