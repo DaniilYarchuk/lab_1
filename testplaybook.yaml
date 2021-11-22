@@ -1,6 +1,6 @@
 ---
 - name: AUTOMATIC SWITCH CONFIG
-  hosts: Switches
+  hosts: Swithes
   gather_facts: false
   connection: local
 
