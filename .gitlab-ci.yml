@@ -1,25 +1,42 @@
-  GNU nano 2.9.3                    .gitlab-ci.yml                              
-
  stages:
+   - check_syntax
    - apply_playbook
-   - test1
+   - ping_test
+   - setup_test
+   - hostname_test
 
- apply_job:
+ syntax_check_job:
+     stage: check_syntax
+     tags:
+        - runner1
+     script:
+        - ansible-playbook myplaybook.yaml -i hosts --syntax-check
+
+ apply_playbook_job:
      stage: apply_playbook
      tags:
         - runner1
      script:
         - ansible-playbook myplaybook.yaml -i hosts
+  
+ ping_test_job:
+     stage: ping_test
+     tags:
+          - runner1
+     script:
+          - ansible-playbook ping_test.yaml -i hosts
 
- test_job1:
-     stage: test1
+ setup_test_job:
+     stage: setup_test
+     tags:
+          - runner1
+     script:
+          - ansible-playbook setup_test.yaml -i hosts
+
+ hostname_test_job:
+     stage: hostname_test
      tags:
           - runner1
      script:
           - ansible-playbook testplaybook.yaml -i hosts
           - python3 test1.py
-     artifacts:
-          paths:
-              - S*.txt
-
-
