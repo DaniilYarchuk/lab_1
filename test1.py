@@ -20,6 +20,7 @@ while 1:
             l=k+1
         if len(result)==0:
             print('Error. Dont find files with configuration of switches.')
+            exit(0)
         print('Test is successfull!')
         exit(0)
 
