@@ -1,8 +1,8 @@
 ---
 - name: AUTOMATIC SWITCH CONFIG
-  hosts: Switches
-  gather_facts: false
+  hosts: Swithes
   connection: local
+  gather_facts: false
   vars:
           Switch1: S1
           Switch2: S2
@@ -14,20 +14,19 @@
                     lines:
                             - hostname {{Switch1}}
             when: inventory_hostname == "S1"
-            
-            
+
+
           - name: SET NAME SWITCH2
             ios_config:
                     lines:
                             - hostname {{Switch2}}
             when: inventory_hostname == "S2"
-            
-          - name: SET NAME SWITCH3
+                     - name: SET NAME SWITCH3
             ios_config:
                     lines:
                             - hostname {{Switch3}}
             when: ansible_host == "192.168.15.43"
-             
+
           - name: SET BASIC PARAMETRS
             ios_config:
                     lines:
@@ -36,8 +35,10 @@
                             - banner motd "Authorized Access Only!"
                     save_when: modified
 
+          - name: SHOW RUNNING-CONFIG
+            ios_command:
+                commands: show running-config
+            register: sh_run
 
- 
-           
-            
-          
+          - name: DEBUG REGISTERED VAR
+            debug: var=sh_run.stdout_lines
